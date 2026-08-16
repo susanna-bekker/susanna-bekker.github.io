@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Susanna Bekker</title>
+  <meta name="description" content="Personal site of Susanna Bekker.">
+  <link rel="canonical" href="https://susannabekker.com/">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Inline SVG favicon: no extra request, no 404 in the console. -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%235b6ee1' stroke-width='8'/><circle cx='50' cy='16' r='9' fill='%235b6ee1'/></svg>">
+
+  <style>
+    /* Light palette is the base; the dark block below only overrides tokens. */
+    :root {
+      --bg: #fbfbfd;
+      --surface: #ffffff;
+      --border: #e4e4ec;
+      --text: #1a1a20;
+      --muted: #6a6a78;
+      --accent: #4a5bd0;
+      --shadow: 0 1px 2px rgba(20, 20, 40, .05), 0 6px 18px rgba(20, 20, 40, .05);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0e0e13;
+        --surface: #17171f;
+        --border: #2a2a36;
+        --text: #ececf2;
+        --muted: #9a9aad;
+        --accent: #8f9cf5;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 18px rgba(0, 0, 0, .25);
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 38rem;
+      margin: 0 auto;
+      padding: clamp(3rem, 12vh, 7rem) 1.5rem 4rem;
+    }
+
+    h1 {
+      margin: 0 0 .4rem;
+      font-size: clamp(2rem, 7vw, 2.75rem);
+      font-weight: 650;
+      letter-spacing: -.022em;
+    }
+
+    .tagline {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    h2 {
+      margin: 3.5rem 0 1.25rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: .85rem;
+    }
+
+    .card {
+      display: block;
+      padding: 1.15rem 1.35rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .18s ease, transform .18s ease;
+    }
+
+    .card:hover,
+    .card:focus-visible {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .card-title::after {
+      content: " \2192";
+    }
+
+    .card-desc {
+      margin: .25rem 0 0;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .card,
+      .card:hover,
+      .card:focus-visible {
+        transition: none;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <h1>Susanna Bekker</h1>
+    <!-- TODO: replace with a real one-line introduction. -->
+    <p class="tagline">Placeholder site &mdash; proper content coming soon.</p>
+
+    <h2>Projects</h2>
+    <ul>
+      <li>
+        <a class="card" href="https://lion-8.susannabekker.com">
+          <span class="card-title">LION-8</span>
+          <p class="card-desc">
+            Run the lion-8 solar X-ray/EUV atmospheric ionization model online for a
+            given date and location, and download the resulting electron and ion densities.
+          </p>
+        </a>
+      </li>
+      <li>
+        <!-- Served by the which-cosmic-object-are-you project repo once the
+             custom domain is live; until then use the github.io URL. -->
+        <a class="card" href="/which-cosmic-object-are-you/">
+          <span class="card-title">Which cosmic object are you?</span>
+          <p class="card-desc">A short personality quiz that matches you with a celestial object.</p>
+        </a>
+      </li>
+    </ul>
+
+    <footer>
+      <a href="https://github.com/susanna-bekker">github.com/susanna-bekker</a>
+    </footer>
+  </main>
+</body>
+
+</html>
