@@ -63,10 +63,11 @@ body {
   border: var(--border-width) solid rgba(255, 213, 121, .4);
   color: var(--gold-300);
   text-decoration: none;
-  transition: background-color var(--dur-fast) var(--ease-standard),
-    color var(--dur-fast) var(--ease-standard),
-    border-color var(--dur-fast) var(--ease-standard),
-    transform var(--dur-base) var(--ease-out);
+  /* 130ms linear on background and colour, and nothing else — measured off the
+     design system's landing template. Deliberately not the --dur-fast token
+     (120ms) or the eased curve: the template hard-codes this. Border colour is
+     not in the list, so it snaps, exactly as the template does. */
+  transition: background 130ms linear, color 130ms linear;
 }
 
 /* Hover only — keyboard focus keeps the resting surface so the design system's
@@ -75,14 +76,12 @@ body {
   background: var(--gold-300);
   border-color: var(--gold-300);
   color: var(--plum-800);
-  transform: translateY(-2px);
 }
 
 .icon:active {
   background: var(--gold-500);
   border-color: var(--gold-500);
   color: var(--plum-800);
-  transform: translateY(1px);
 }
 
 /* Pointer and keyboard can land on the same element: a gold ring on the gold
@@ -144,23 +143,19 @@ body {
   color: var(--cream);
   text-align: center;
   text-decoration: none;
-  transition: background-color var(--dur-fast) var(--ease-standard),
-    color var(--dur-fast) var(--ease-standard),
-    transform var(--dur-base) var(--ease-out);
+  /* Same 130ms linear colour flip as the template: no lift, no shadow. The
+     plum field is flat and matte — the flip itself is the whole interaction. */
+  transition: background 130ms linear, color 130ms linear;
 }
 
-/* Colour flips fast; the 2px lift carries the motion. No shadow — the plum
-   field is flat and matte, so depth is read from the lift alone. */
 .door:hover {
   background: var(--gold-300);
   color: var(--plum-800);
-  transform: translateY(-2px);
 }
 
 .door:active {
   background: var(--gold-500);
   color: var(--plum-800);
-  transform: translateY(1px);
 }
 
 .door-title {
@@ -191,23 +186,8 @@ body {
   justify-content: center;
 }
 
-/* --- Reduced motion ------------------------------------------------------ */
-
-@media (prefers-reduced-motion: reduce) {
-
-  /* Keep the colour flip, drop the movement. */
-  .door,
-  .icon {
-    transition-property: background-color, color, border-color;
-  }
-
-  .door:hover,
-  .door:active,
-  .icon:hover,
-  .icon:active {
-    transform: none;
-  }
-}
+/* Nothing moves anywhere on this page, so there is no prefers-reduced-motion
+   block: the only transition is a colour flip, which is not motion. */
 
 /* --- Narrow viewports ---------------------------------------------------- */
 
