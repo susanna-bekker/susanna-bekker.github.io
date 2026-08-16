@@ -65,7 +65,8 @@ body {
   text-decoration: none;
   transition: background-color var(--dur-fast) var(--ease-standard),
     color var(--dur-fast) var(--ease-standard),
-    border-color var(--dur-fast) var(--ease-standard);
+    border-color var(--dur-fast) var(--ease-standard),
+    transform var(--dur-base) var(--ease-out);
 }
 
 /* Hover only — keyboard focus keeps the resting surface so the design system's
@@ -74,12 +75,14 @@ body {
   background: var(--gold-300);
   border-color: var(--gold-300);
   color: var(--plum-800);
+  transform: translateY(-2px);
 }
 
 .icon:active {
   background: var(--gold-500);
   border-color: var(--gold-500);
   color: var(--plum-800);
+  transform: translateY(1px);
 }
 
 /* Pointer and keyboard can land on the same element: a gold ring on the gold
@@ -142,17 +145,22 @@ body {
   text-align: center;
   text-decoration: none;
   transition: background-color var(--dur-fast) var(--ease-standard),
-    color var(--dur-fast) var(--ease-standard);
+    color var(--dur-fast) var(--ease-standard),
+    transform var(--dur-base) var(--ease-out);
 }
 
+/* Colour flips fast; the 2px lift carries the motion. No shadow — the plum
+   field is flat and matte, so depth is read from the lift alone. */
 .door:hover {
   background: var(--gold-300);
   color: var(--plum-800);
+  transform: translateY(-2px);
 }
 
 .door:active {
   background: var(--gold-500);
   color: var(--plum-800);
+  transform: translateY(1px);
 }
 
 .door-title {
@@ -181,6 +189,24 @@ body {
 .notfound .doors {
   grid-template-columns: minmax(0, 420px);
   justify-content: center;
+}
+
+/* --- Reduced motion ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  /* Keep the colour flip, drop the movement. */
+  .door,
+  .icon {
+    transition-property: background-color, color, border-color;
+  }
+
+  .door:hover,
+  .door:active,
+  .icon:hover,
+  .icon:active {
+    transform: none;
+  }
 }
 
 /* --- Narrow viewports ---------------------------------------------------- */
