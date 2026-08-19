@@ -156,7 +156,6 @@
     .paper {
       display: flex;
       flex-direction: column;
-      gap: .375rem;
       padding: 1.5rem;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -175,15 +174,6 @@
         row-gap: 0;
       }
 
-      .paper .desc {
-        margin-top: .625rem;
-      }
-
-      /* The row already reserves the space; keeping the auto margin here would
-         drop each citation to the foot of its own row and stagger the rules. */
-      .paper .cite {
-        margin-top: 0;
-      }
     }
 
     .step {
@@ -195,13 +185,14 @@
     }
 
     .desc {
-      margin: .25rem 0 0;
+      margin: .625rem 0 0;
       color: var(--body);
     }
 
-    /* The article itself sits under the description, ruled off from it. */
+    /* The article itself sits under the description, ruled off from it — equal
+       space either side of the rule. */
     .cite {
-      margin-top: auto;
+      margin-top: 1.25rem;
       padding-top: 1.25rem;
       border-top: 1px solid var(--border);
       display: flex;
@@ -227,8 +218,12 @@
       color: var(--faint);
     }
 
+    /* Auto top margin, so the links sit on the floor of the card whatever the
+       citation above them runs to; the padding keeps them off the journal line
+       when there is no slack to take up. */
     .links {
-      margin: .5rem 0 0;
+      margin: auto 0 0;
+      padding-top: .5rem;
     }
 
     a {
