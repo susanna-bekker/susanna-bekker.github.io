@@ -79,17 +79,25 @@
     }
 
     .page {
-      max-width: 56rem;
+      max-width: 76rem;
       margin: 0 auto;
-      padding: 4rem 1.5rem;
+      padding: 4rem 2rem;
     }
 
     h1 {
       margin: 0 0 1.75rem;
-      font-size: clamp(1.75rem, 4.5vw, 2.25rem);
+      font-size: clamp(1.75rem, 4.5vw, 2.5rem);
       font-weight: 600;
       letter-spacing: -.025em;
       line-height: 1.2;
+    }
+
+    /* The lane is set by the three-card row; running prose across all of it
+       would be well past a readable line length, so the heading and intro keep
+       their own measure. */
+    h1,
+    .intro {
+      max-width: 46rem;
     }
 
     .intro p {
