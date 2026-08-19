@@ -164,6 +164,28 @@
       /* rounded-xl */
     }
 
+    /* Side by side, each card takes its row tracks from the grid itself, so the
+       label, the description and the citation start at the same height in all
+       three however long each description runs. */
+    @media (min-width: 801px) {
+      .paper {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
+        row-gap: 0;
+      }
+
+      .paper .desc {
+        margin-top: .625rem;
+      }
+
+      /* The row already reserves the space; keeping the auto margin here would
+         drop each citation to the foot of its own row and stagger the rules. */
+      .paper .cite {
+        margin-top: 0;
+      }
+    }
+
     .step {
       font-size: .75rem;
       font-weight: 600;
@@ -177,11 +199,11 @@
       color: var(--body);
     }
 
-    /* The article itself sits under the description, pushed to the foot of the
-       card so the citations line up across the row. */
+    /* The article itself sits under the description, ruled off from it. */
     .cite {
       margin-top: auto;
       padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       gap: .25rem;
