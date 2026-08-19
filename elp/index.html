@@ -110,6 +110,34 @@
       color: var(--muted);
     }
 
+    .figures {
+      display: grid;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    /* The plots are drawn on white, so they keep a white mount in both themes
+       rather than sitting straight on the dark canvas. */
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      padding: 1rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+    }
+
+    figcaption {
+      margin-top: .75rem;
+      color: var(--faint);
+      font-size: .9375rem;
+    }
+
     .papers {
       list-style: none;
       margin: 0;
@@ -144,6 +172,22 @@
       color: var(--faint);
     }
 
+    .desc {
+      margin: .25rem 0 0;
+      color: var(--body);
+    }
+
+    /* The article itself sits under the description, pushed to the foot of the
+       card so the citations line up across the row. */
+    .cite {
+      margin-top: auto;
+      padding-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      font-size: .9375rem;
+    }
+
     .authors {
       margin: 0;
       font-weight: 600;
@@ -152,38 +196,33 @@
 
     .title {
       margin: 0;
-      color: var(--body);
+      color: var(--muted);
     }
 
     .journal {
       margin: 0;
       font-style: italic;
       color: var(--faint);
-      font-size: .9375rem;
     }
 
-    .desc {
-      margin: .75rem 0 0;
-      color: var(--muted);
-      font-size: .9375rem;
-    }
-
-    .doi {
-      margin: auto 0 0;
-      padding-top: .75rem;
-      font-size: .9375rem;
+    .links {
+      margin: .5rem 0 0;
     }
 
     a {
       color: var(--accent);
     }
 
-    .doi a {
+    .links a {
       text-decoration: none;
     }
 
-    .doi a:hover {
+    .links a:hover {
       text-decoration: underline;
+    }
+
+    .sep {
+      color: var(--faint);
     }
 
     footer {
@@ -222,59 +261,93 @@
       </p>
     </div>
 
+    <div class="figures">
+      <figure>
+        <img src="/assets/img/elp-1.png" width="4026" height="2396" loading="lazy"
+          alt="Time-wavelength map of background-subtracted solar irradiance across EUV emission lines, with the GOES 0.1-0.8 nm X-ray flux overplotted. The hot lines peak with the X-ray flux; Fe XV 28.4 nm and Fe XVI 33.5 nm brighten again well afterwards.">
+        <figcaption>
+          Solar emissions through a flare. The main phase peaks in the hot lines and in the GOES X-ray
+          flux; the warm coronal lines &mdash; Fe&nbsp;XV 28.4&nbsp;nm and Fe&nbsp;XVI 33.5&nbsp;nm &mdash;
+          peak again during the EUV late phase, around 40 minutes later.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/img/elp-2.png" width="4894" height="1974" loading="lazy"
+          alt="Two panels. Left: relative TEC against a smooth quiet-time reference curve. Right: the difference between them, with one peak during the main phase and a second, smaller one during the late phase.">
+        <figcaption>
+          The ionospheric response to the same flare. Relative TEC departs from the quiet-time curve
+          (left); the difference (right) peaks once during the main phase and again during the late
+          phase, at roughly half the amplitude.
+        </figcaption>
+      </figure>
+    </div>
+
     <h2>Publications</h2>
     <ul class="papers">
       <li class="paper">
         <span class="step">Case study</span>
-        <p class="authors">Bekker, Milligan &amp; Ryakhovsky (2024)</p>
-        <p class="title">
-          The Influence of Different Phases of a Solar Flare on Changes in the Total Electron Content
-          in the Earth&rsquo;s Ionosphere
-        </p>
-        <p class="journal">The Astrophysical Journal, 971, 188</p>
         <p class="desc">
           The first report of a late-phase effect on ionospheric Total Electron Content (TEC), based on
           the flare of 3 November 2011. This article defines the most geoeffective emission of an ELP and
           provides a numerical estimate of its impact using GNSS data.
         </p>
-        <p class="doi">
-          <a href="https://doi.org/10.3847/1538-4357/ad631d" target="_blank" rel="noreferrer">
-            DOI: 10.3847/1538-4357/ad631d
-          </a>
-        </p>
+        <div class="cite">
+          <p class="authors">Bekker, Milligan &amp; Ryakhovsky (2024)</p>
+          <p class="title">
+            The Influence of Different Phases of a Solar Flare on Changes in the Total Electron Content
+            in the Earth&rsquo;s Ionosphere
+          </p>
+          <p class="journal">The Astrophysical Journal, 971, 188</p>
+          <p class="links">
+            <a href="https://doi.org/10.3847/1538-4357/ad631d" target="_blank" rel="noreferrer">DOI</a>
+            <span class="sep">&middot;</span>
+            <a href="/assets/docs/AD631D.pdf">PDF</a>
+          </p>
+        </div>
       </li>
 
       <li class="paper">
         <span class="step">14 X-class flares</span>
-        <p class="authors">Bekker, Milligan &amp; Ryakhovsky (2025)</p>
-        <p class="title">
-          Response of Ionospheric Total Electron Content to the Impulsive and Late Phases of X-Class
-          Solar Flares With Various Center-to-Limb Locations
-        </p>
-        <p class="journal">JGR: Space Physics, 130(10), e2025JA034281</p>
         <p class="desc">
           Analysis of the Total Electron Content response to the late phases of 14 X-class flares.
           Investigation of how solar flare location affects the ratio between the ionospheric response
           to a flare's main phase and its late phase.
         </p>
-        <p class="doi">
-          <a href="https://doi.org/10.1029/2025JA034281" target="_blank" rel="noreferrer">
-            DOI: 10.1029/2025JA034281
-          </a>
-        </p>
+        <div class="cite">
+          <p class="authors">Bekker, Milligan &amp; Ryakhovsky (2025)</p>
+          <p class="title">
+            Response of Ionospheric Total Electron Content to the Impulsive and Late Phases of X-Class
+            Solar Flares With Various Center-to-Limb Locations
+          </p>
+          <p class="journal">JGR: Space Physics, 130(10), e2025JA034281</p>
+          <p class="links">
+            <a href="https://doi.org/10.1029/2025JA034281" target="_blank" rel="noreferrer">DOI</a>
+            <span class="sep">&middot;</span>
+            <a href="/assets/docs/JGR_Space_Physics_2025_Bekker_Response_of_Ionospheric_Total_Electron.pdf">PDF</a>
+          </p>
+        </div>
       </li>
 
       <li class="paper">
-        <!-- ELP.pptx carried the description only for this one, and no matching
-             published reference was found. Add .authors / .title / .journal /
-             .doi lines here — same markup as the two cards above — once it is
-             out, so all three cards read alike. -->
         <span class="step">Statistical study</span>
         <p class="desc">
           Statistical analysis of geoeffective enhancements in Fe&nbsp;XV 28.4&nbsp;nm emission.
           Detection of strong late phases following C- and M-class flares. Empirical relationship
           between irradiance flux increase and TEC response.
         </p>
+        <div class="cite">
+          <p class="authors">Bekker et al. (2026)</p>
+          <p class="title">
+            Statistical Study of Geoeffective Fe&nbsp;XV 28.4&nbsp;nm Emission Bursts and Their Influence
+            on Ionospheric Total Electron Content During the Late Phase of Solar Flares
+          </p>
+          <p class="journal">JGR: Space Physics, 131(7), e2026JA035779</p>
+          <p class="links">
+            <a href="https://doi.org/10.1029/2026JA035779" target="_blank" rel="noreferrer">DOI</a>
+            <span class="sep">&middot;</span>
+            <a href="/assets/docs/JGR_Space_Physics_2026_Bekker_Statistical_Study_of_Geoeffective.pdf">PDF</a>
+          </p>
+        </div>
       </li>
     </ul>
 
