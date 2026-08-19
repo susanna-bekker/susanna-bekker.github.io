@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Effect of a Flare Late Phase on the Earth&rsquo;s Ionosphere &mdash; Susanna Bekker</title>
+  <meta name="description"
+    content="How the extreme-ultraviolet late phase (ELP) of a solar flare affects the Earth's ionosphere: from a single-flare case study to a large-scale statistical analysis.">
+  <link rel="canonical" href="https://susannabekker.com/elp/">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Same inline SVG favicon as the home page, so the tab identity is the site's
+       even though this page uses the LION-8 design system rather than the
+       landing page's. Keep the two in sync. -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23941651'/><text x='32' y='47' text-anchor='middle' font-family='Jost, Futura, sans-serif' font-size='44' font-weight='600' fill='%23ffd579'>S</text></svg>">
+
+  <style>
+    /* Design system borrowed from LION-8 (lion-8.susannabekker.com): Tailwind's
+       default `neutral` ramp on a system font, with the violet accent ramp for
+       links. Tailwind itself isn't used here — this page is plain static HTML
+       like the rest of the site — so the tokens are those Tailwind values,
+       written out. Light is the base; the dark block only overrides tokens. */
+    :root {
+      --bg: #fafafa;
+      /* neutral-50 */
+      --surface: #ffffff;
+      --border: #e5e5e5;
+      /* neutral-200 */
+      --text: #171717;
+      /* neutral-900 */
+      --text-strong: #262626;
+      /* neutral-800 */
+      --body: #404040;
+      /* neutral-700 */
+      --muted: #525252;
+      /* neutral-600 */
+      --faint: #737373;
+      /* neutral-500 */
+      --accent: #7c3aed;
+      /* accent-600 (violet) */
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a;
+        /* neutral-950 */
+        --surface: #171717;
+        /* neutral-900 */
+        --border: #262626;
+        /* neutral-800 */
+        --text: #f5f5f5;
+        /* neutral-100 */
+        --text-strong: #e5e5e5;
+        /* neutral-200 */
+        --body: #d4d4d4;
+        /* neutral-300 */
+        --muted: #a3a3a3;
+        /* neutral-400 */
+        --faint: #a3a3a3;
+        --accent: #a78bfa;
+        /* accent-400 */
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.65 system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 2.5rem;
+      color: var(--muted);
+      font-size: .875rem;
+      text-decoration: none;
+    }
+
+    .back:hover {
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0 0 1.75rem;
+      font-size: clamp(1.75rem, 4.5vw, 2.25rem);
+      font-weight: 600;
+      letter-spacing: -.025em;
+      line-height: 1.2;
+    }
+
+    .intro p {
+      margin: 0 0 1rem;
+      color: var(--body);
+    }
+
+    .intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      margin: 3rem 0 1.25rem;
+      font-size: .8125rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .papers {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 800px) {
+      .papers {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .paper {
+      display: flex;
+      flex-direction: column;
+      gap: .375rem;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      /* rounded-xl */
+    }
+
+    .step {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .authors {
+      margin: 0;
+      font-weight: 600;
+      color: var(--text-strong);
+    }
+
+    .title {
+      margin: 0;
+      color: var(--body);
+    }
+
+    .journal {
+      margin: 0;
+      font-style: italic;
+      color: var(--faint);
+      font-size: .9375rem;
+    }
+
+    .desc {
+      margin: .75rem 0 0;
+      color: var(--muted);
+      font-size: .9375rem;
+    }
+
+    .doi {
+      margin: auto 0 0;
+      padding-top: .75rem;
+      font-size: .9375rem;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .doi a {
+      text-decoration: none;
+    }
+
+    .doi a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .875rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <a class="back" href="/">&larr; Susanna Bekker</a>
+
+    <h1>Effect of a Flare Late Phase on the Earth&rsquo;s Ionosphere</h1>
+
+    <div class="intro">
+      <p>
+        One variant of coronal loop reconnection following the impulsive phase of a flare results in
+        warm coronal emissions (such as Fe&nbsp;XV 28.4&nbsp;nm and Fe&nbsp;XVI 33.5&nbsp;nm) exhibiting
+        a second, large emission peak that can lag the primary flare by hours. This secondary peak is
+        known as an extreme-ultraviolet late phase (ELP).
+      </p>
+      <p>
+        The effect of the late phase on Earth's ionosphere was discovered only in 2024. The associated
+        press release ranked in the top 0.1% of all research outputs tracked by Altmetric, reflecting
+        exceptional interest beyond the academic community.
+      </p>
+      <p>
+        Below, you can read how our research evolved: from an initial case study to a large-scale
+        statistical analysis.
+      </p>
+    </div>
+
+    <h2>Publications</h2>
+    <ul class="papers">
+      <li class="paper">
+        <span class="step">Case study</span>
+        <p class="authors">Bekker, Milligan &amp; Ryakhovsky (2024)</p>
+        <p class="title">
+          The Influence of Different Phases of a Solar Flare on Changes in the Total Electron Content
+          in the Earth&rsquo;s Ionosphere
+        </p>
+        <p class="journal">The Astrophysical Journal, 971, 188</p>
+        <p class="desc">
+          The first report of a late-phase effect on ionospheric Total Electron Content (TEC), based on
+          the flare of 3 November 2011. This article defines the most geoeffective emission of an ELP and
+          provides a numerical estimate of its impact using GNSS data.
+        </p>
+        <p class="doi">
+          <a href="https://doi.org/10.3847/1538-4357/ad631d" target="_blank" rel="noreferrer">
+            DOI: 10.3847/1538-4357/ad631d
+          </a>
+        </p>
+      </li>
+
+      <li class="paper">
+        <span class="step">14 X-class flares</span>
+        <p class="authors">Bekker, Milligan &amp; Ryakhovsky (2025)</p>
+        <p class="title">
+          Response of Ionospheric Total Electron Content to the Impulsive and Late Phases of X-Class
+          Solar Flares With Various Center-to-Limb Locations
+        </p>
+        <p class="journal">JGR: Space Physics, 130(10), e2025JA034281</p>
+        <p class="desc">
+          Analysis of the Total Electron Content response to the late phases of 14 X-class flares.
+          Investigation of how solar flare location affects the ratio between the ionospheric response
+          to a flare's main phase and its late phase.
+        </p>
+        <p class="doi">
+          <a href="https://doi.org/10.1029/2025JA034281" target="_blank" rel="noreferrer">
+            DOI: 10.1029/2025JA034281
+          </a>
+        </p>
+      </li>
+
+      <li class="paper">
+        <!-- ELP.pptx carried the description only for this one, and no matching
+             published reference was found. Add .authors / .title / .journal /
+             .doi lines here — same markup as the two cards above — once it is
+             out, so all three cards read alike. -->
+        <span class="step">Statistical study</span>
+        <p class="desc">
+          Statistical analysis of geoeffective enhancements in Fe&nbsp;XV 28.4&nbsp;nm emission.
+          Detection of strong late phases following C- and M-class flares. Empirical relationship
+          between irradiance flux increase and TEC response.
+        </p>
+      </li>
+    </ul>
+
+    <footer>
+      <p>
+        Susanna Bekker,
+        <a href="mailto:susanna.bekker@gmail.com">susanna.bekker@gmail.com</a>
+      </p>
+    </footer>
+  </main>
+</body>
+
+</html>
